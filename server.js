@@ -19,10 +19,6 @@ app.use('/protected-route', verifyToken, (req, res) => {
     res.json({ message: "This is a protected route.", user: req.user });
 })
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
 app.use('/signup', require('./routes/signupRoutes'))
 
 app.use('/login', require('./routes/loginRoutes'))
@@ -34,6 +30,8 @@ mongoose.connect(process.env.MONGO_ID).then(() => {
     console.log("mongodb");
 });
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 
